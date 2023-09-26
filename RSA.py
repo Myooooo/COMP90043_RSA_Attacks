@@ -31,7 +31,12 @@ class RSA:
         phi = (self.p - 1) * (self.q - 1)
         
         if self.e is None:
+            # randomly generate e if not given
             self.e = self.rand_e(phi)
+        else:
+            # check if e is coprime with phi
+            if utils.gcd(self.e, phi) != 1:
+                raise Exception("e is not coprime with phi")
         
         d = utils.invMod(self.e, phi)
 
