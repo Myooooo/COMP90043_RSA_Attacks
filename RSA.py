@@ -16,7 +16,7 @@ class RSA:
         #     assert(utils.isPrime(e), True)
         
         # generate public and private keys
-        self.pub_key, self.pri_key = self.keygen(p,q)
+        self.pub_key, self.pri_key = self.keygen()
     
     # generate a random e that is odd and coprime with phi
     def rand_e(self, phi):
@@ -26,7 +26,7 @@ class RSA:
                 return e
     
     # key generation
-    def keygen(self, p, q):
+    def keygen(self):
         n = self.p * self.q
         phi = (self.p - 1) * (self.q - 1)
         
