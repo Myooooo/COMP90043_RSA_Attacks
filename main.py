@@ -13,3 +13,5 @@ if __name__ == "__main__":
     print("message:", m)
     print("encrypted:", c)
     print("decrypted:", decryped)
+
+    print(utils.isPrime(10921304574392093059217153525481121125933934477429))

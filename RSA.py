@@ -7,13 +7,13 @@ class RSA:
         self.q = q
         self.e = e
 
-        # # check primalities of p and q
-        # assert(utils.isPrime(p), True)
-        # assert(utils.isPrime(q), True)
+        # check primalities of p and q
+        assert(utils.isPrime(p), True)
+        assert(utils.isPrime(q), True)
 
-        # # check primality of e if given
-        # if e is not None:
-        #     assert(utils.isPrime(e), True)
+        # check primality of e if given
+        if e is not None:
+            assert(utils.isPrime(e), True)
         
         # generate public and private keys
         self.pub_key, self.pri_key = self.keygen()
