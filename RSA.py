@@ -69,3 +69,8 @@ class RSA:
         d, n = self.pri_key
         m = [chr(utils.modExp(ch, d, n)) for ch in c]
         return ''.join(m)
+    
+    def sign(self, m):
+        d, n = self.pri_key
+        c = [utils.modExp(ord(ch), d, n) for ch in m]
+        return c
