@@ -16,8 +16,10 @@ def isPrime(n, s=5):
 
 # return a random prime number from start to end
 def randPrime(start=2, end=100):
-    # TO-DO
-    pass
+    prime_candidate = random.randint(start, end)
+    while not isPrime(prime_candidate):
+        prime_candidate = random.randint(start, end)
+    return prime_candidate
 
 # return GCD of a and b
 def gcd(a, b):
@@ -78,11 +80,9 @@ def witnessMR(a, n):
         u //= 2
     
     x = modExp(a, u, n)
-    print(a,n,t,u,x)
     for _ in range(t):
         prev = x
         x = modExp(prev, 2, n)
-        print(prev, x)
         if x == 1 and prev != 1 and prev != n-1:
             return True
     if x != 1:
