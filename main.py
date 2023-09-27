@@ -25,19 +25,19 @@ if __name__ == "__main__":
     # q = utils.randPrime(1000, 10000)
     # rsa = RSA(p, q)
 
-    print("p={}, q={}, n={}, e={}, d={}".format(rsa.p, rsa.q, rsa.pub_key[1], rsa.pub_key[0], rsa.pri_key[0]))
+    print("p={}\nq={}\nn={}\ne={}\nd={}".format(rsa.p, rsa.q, rsa.pub_key[1], rsa.pub_key[0], rsa.pri_key[0]))
 
     m = "hello"
 
-    start_time = time.time()
+    start_time = time.time_ns()
     c = rsa.encrypt(m)
-    end_time = time.time()
-    print("encryption time: {}s".format(end_time - start_time))
+    end_time = time.time_ns()
+    print("encryption time: {}ms".format((end_time - start_time)/1000000))
 
-    start_time = time.time()
+    start_time = time.time_ns()
     decryped = rsa.decrypt(c)
-    end_time = time.time()
-    print("decryption time: {}s".format(end_time - start_time))
+    end_time = time.time_ns()
+    print("decryption time: {}ms".format((end_time - start_time)/1000000))
 
     print("message:", m)
     print("encrypted:", c)

@@ -48,7 +48,7 @@ class RSA:
         
         if e is None:
             # randomly generate e if not given
-            e = self.smallest_e(phi)
+            e = self.rand_e(phi)
         else:
             # check if e is coprime with phi
             if utils.gcd(e, phi) != 1:

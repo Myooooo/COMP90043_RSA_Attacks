@@ -42,7 +42,7 @@ def xgcd(a, n):
 # return modular inverse of a mod n
 # None if does not exist
 def invMod(a, n):
-    gcd, x, y = xgcd(a, n)
+    gcd, x, _ = xgcd(a, n)
     if gcd != 1:
         return None
     else:
