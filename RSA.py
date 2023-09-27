@@ -6,12 +6,12 @@ class RSA:
         # check primalities of p and q if given
         # generate random p and q if not given
         if p is not None:
-            assert(utils.isPrime(p), True)
+            assert utils.isPrime(p)
         else:
             p = utils.randPrime(10, 1000)
         
         if q is not None:
-            assert(utils.isPrime(q), True)
+            assert utils.isPrime(q)
         else:
             q = utils.randPrime(10, 1000)
 
@@ -52,7 +52,7 @@ class RSA:
         else:
             # check if e is coprime with phi
             if utils.gcd(e, phi) != 1:
-                raise Exception("e is not coprime with phi")
+                raise Exception("Error: e is not coprime with phi")
         
         d = utils.invMod(e, phi)
 
