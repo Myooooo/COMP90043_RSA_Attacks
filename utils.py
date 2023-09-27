@@ -27,25 +27,26 @@ def gcd(a, b):
         return b
     return gcd(b, a % b)
 
-# extended euclidean algorithm
-def xgcd(a, b):
+# extended euclidean algorithm a*x + n*y=gcd(a,n)
+def xgcd(a, n):
     if a == 0:
-        return b,0,1
+        return n,0,1
     
-    gcd,x,y = xgcd(b%a,a)
+    gcd,x1,y1 = xgcd(n % a,a)
 
-    m = y - (b//a) * x
-    n = x
+    x = y1 - (n // a) * x1
+    y = x1
 
-    return gcd,m,n
+    return gcd,x,y
 
 # return modular inverse of a mod n
 # None if does not exist
 def invMod(a, n):
-    for i in range(1, n):
-        if (a * i) % n == 1:
-            return i
-    return None
+    gcd, x, y = xgcd(a, n)
+    if gcd != 1:
+        return None
+    else:
+        return x % n
 
 # return a^b mod n
 # Introduction to Algorithms, 4th edition, p. 935
