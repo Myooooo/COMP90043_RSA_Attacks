@@ -25,7 +25,13 @@ if __name__ == "__main__":
     # q = utils.randPrime(1000, 10000)
     # rsa = RSA(p, q)
 
+    # random p,q with defined bit length
+    # p = utils.randPrime(n_bits = 100)
+    # q = utils.randPrime(n_bits = 100)
+    # rsa = RSA(p, q)
+
     print("p={}\nq={}\nn={}\ne={}\nd={}".format(rsa.p, rsa.q, rsa.pub_key[1], rsa.pub_key[0], rsa.pri_key[0]))
+    print("key length: {}bits".format((rsa.p*rsa.q).bit_length()))
 
     m = "hello"
 

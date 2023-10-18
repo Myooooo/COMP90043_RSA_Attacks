@@ -21,6 +21,13 @@ def randPrime(start=2, end=100):
         prime_candidate = random.randint(start, end)
     return prime_candidate
 
+# return a random n_bits prime number
+def randPrime(n_bits = 10):
+    prime_candidate = random.getrandbits(n_bits)
+    while not isPrime(prime_candidate):
+        prime_candidate = random.getrandbits(n_bits)
+    return prime_candidate
+
 # return GCD of a and b
 def gcd(a, b):
     if a % b == 0:
