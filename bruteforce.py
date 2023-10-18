@@ -1,13 +1,16 @@
 import sys, os
 import random
 import math
+import time
+from utils import generate_n_bit_prime
 from sympy import *
 from time import sleep
 import matplotlib.pyplot as plt
 import datetime
 from string import ascii_letters, digits
 from RSA import RSA
-    
+
+# function to factorize an integer n
 def fac(n):
     max = math.ceil(math.sqrt(n))
     s = 3
@@ -19,6 +22,34 @@ def fac(n):
         
     return s
     
+    
+
+def main():
+    # Time taken for each bit length
+    time_data = {}
+    
+    # Looping through different bit lengths
+    for n_bits in range(30, 33):  # Example bit lengths 30, 31, 32
+        # Start time
+        start_time = time.time()
+        
+        # Generate n-bit prime numbers for p and q
+        p = generate_n_bit_prime(n_bits)
+        q = generate_n_bit_prime(n_bits)
+        
+        # Existing RSA and brute-force logic (To be filled in)
+        # ...
+        
+        # End time
+        end_time = time.time()
+        
+        # Calculate time taken
+        time_taken = end_time - start_time
+        
+        # Store the time data
+        time_data[n_bits] = time_taken
+        
+        print(f"Time taken for {n_bits}-bit RSA: {time_taken} seconds")
     
 def main():
     #p = random.choice()

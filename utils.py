@@ -96,3 +96,9 @@ def witnessMR(a, n):
     if x != 1:
         return True
     return False
+
+
+# Function to generate n-bit prime numbers
+def generate_n_bit_prime(n):
+    from sympy import isprime, randprime
+    return randprime(2**(n-1), 2**n)
