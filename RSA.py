@@ -17,7 +17,7 @@ class RSA:
 
         # check primality of e if given
         if e is not None:
-            assert(utils.isPrime(e), True)
+            assert utils.isPrime(e)
 
         # store p, q
         self.p = p
@@ -70,6 +70,7 @@ class RSA:
         m = [chr(utils.modExp(ch, d, n)) for ch in c]
         return ''.join(m)
     
+    # signature
     def sign(self, m):
         d, n = self.pri_key
         c = [utils.modExp(ord(ch), d, n) for ch in m]
