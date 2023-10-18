@@ -14,7 +14,7 @@ MINBIT = 2
 MAXBIT = 31
 REPEAT = 10.0
 
-# function to factorize an integer n
+# Function to factorize an integer n
 def fac(n):
     max = math.ceil(math.sqrt(n))
     s = 3
@@ -28,7 +28,7 @@ def fac(n):
     
     
 def main():
-    # initialize the time count for n-bit RSA brute force decryption
+    # Initialize the time count for n-bit RSA brute force decryption
     time_data = {}
     for bit in range(MINBIT, MAXBIT):
         time_data[bit] = 0
@@ -40,9 +40,10 @@ def main():
     
     for bit in range(MINBIT, MAXBIT):
         time_data[bit] /= REPEAT
-    
+        print(f"Time taken for {bit}-bit RSA: {time_data[bit]} seconds")
+        
+    # Visualize the aggregate data with a plot
     plt.axis('auto')
-
     for i in range(MINBIT, MAXBIT):
         plt.annotate(str(i),
     xy=(i, time_data[i]), xycoords='data',
@@ -52,7 +53,7 @@ def main():
     arrowprops=dict(arrowstyle="-"))
     plt.plot(time_data.keys(),time_data.values())
     plt.xlabel("Length(bits)")
-    plt.ylabel("Time")
+    plt.ylabel("Time(seconds)")
     plt.show()
     
 def test(time_data):
@@ -67,13 +68,8 @@ def test(time_data):
         p= fac(p*q)
         end_time = time.time()
         
-        # Calculate time taken
-        time_taken = end_time - start_time
-        
-        # Store the time data
-        time_data[n_bits] += time_taken
-        
-        print(f"Time taken for {n_bits}-bit RSA: {time_taken} seconds")
+        # Calculate time taken and store the time data
+        time_data[n_bits] += end_time - start_time
 
 if __name__ == "__main__":
     main()
