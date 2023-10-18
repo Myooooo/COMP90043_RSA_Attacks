@@ -11,7 +11,8 @@ import utils
 from RSA import RSA
 
 MINBIT = 2
-MAXBIT = 30
+MAXBIT = 31
+REPEAT = 10.0
 
 # function to factorize an integer n
 def fac(n):
@@ -26,11 +27,35 @@ def fac(n):
     return s
     
     
-
 def main():
-    # Time taken for each bit length
+    # initialize the time count for n-bit RSA brute force decryption
     time_data = {}
+    for bit in range(MINBIT, MAXBIT):
+        time_data[bit] = 0
     
+    i = 0
+    while (i < REPEAT):
+        test(time_data)
+        i += 1
+    
+    for bit in range(MINBIT, MAXBIT):
+        time_data[bit] /= REPEAT
+    
+    plt.axis('auto')
+
+    for i in range(MINBIT, MAXBIT):
+        plt.annotate(str(i),
+    xy=(i, time_data[i]), xycoords='data',
+    xytext=(5, 0), textcoords='offset points',
+    size=7,
+    bbox=dict(boxstyle="round4,pad=.5", fc="0.8", alpha=0.4),
+    arrowprops=dict(arrowstyle="-"))
+    plt.plot(time_data.keys(),time_data.values())
+    plt.xlabel("Length(bits)")
+    plt.ylabel("Time")
+    plt.show()
+    
+def test(time_data):
     # Looping through different bit lengths
     for n_bits in range(MINBIT, MAXBIT):
 
@@ -46,24 +71,9 @@ def main():
         time_taken = end_time - start_time
         
         # Store the time data
-        time_data[n_bits] = time_taken
+        time_data[n_bits] += time_taken
         
         print(f"Time taken for {n_bits}-bit RSA: {time_taken} seconds")
-
-    plt.axis('auto')
-
-    for i in range(MINBIT, MAXBIT):
-        plt.annotate(str(i),
-    xy=(i, time_data[i]), xycoords='data',
-    xytext=(5, 0), textcoords='offset points',
-    size=7,
-    bbox=dict(boxstyle="round4,pad=.5", fc="0.8", alpha=0.4),
-    arrowprops=dict(arrowstyle="-"))
-    plt.plot(time_data.keys(),time_data.values())
-    plt.xlabel("Length(bits)")
-    plt.ylabel("Time")
-    plt.show()
-    return 1
 
 if __name__ == "__main__":
     main()
