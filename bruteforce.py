@@ -9,7 +9,8 @@ import matplotlib.pyplot as plt
 import datetime
 from string import ascii_letters, digits
 from RSA import RSA
-    
+
+# function to factorize an integer n
 def fac(n):
     max = math.ceil(math.sqrt(n))
     s = 3
@@ -50,8 +51,6 @@ def main():
         
         print(f"Time taken for {n_bits}-bit RSA: {time_taken} seconds")
     
-    # Optional: Plot the time data (To be filled in)
-    # ...
 def main():
     #p = random.choice()
     p = 66424187
