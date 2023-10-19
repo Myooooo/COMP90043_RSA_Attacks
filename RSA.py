@@ -63,12 +63,22 @@ class RSA:
         e, n = self.pub_key
         c = [utils.modExp(ord(ch), e, n) for ch in m]
         return c
-
+    
+    # encryption on integer
+    def encrypt_int(self, m_num):
+        e, n = self.pub_key
+        return utils.modExp(m_num, e, n)
+    
     # decryption
     def decrypt(self, c):
         d, n = self.pri_key
         m = [chr(utils.modExp(ch, d, n)) for ch in c]
         return ''.join(m)
+    
+    # decryption on integer
+    def decrypt_int(self, c_num):
+        d, n = self.pri_key
+        return utils.modExp(c_num, d, n)
     
     # signature
     def sign(self, m):
