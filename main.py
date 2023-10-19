@@ -2,19 +2,21 @@ import random
 import time
 import warnings
 
+import utils
 from RSA import RSA
+from TimingAttack import TimingAttack
 
 random.seed(time.time())
 warnings.filterwarnings('ignore')
 
-if __name__ == "__main__":
+def main():
     # # random p,q,e
     # rsa = RSA()
 
-    # given p,q
-    p = 10921304574392093059217153525481121125933934477429
-    q = 89855181341172893110764453512406142438324081807631
-    rsa = RSA(p,q)
+    # # given p,q
+    # p = 10921304574392093059217153525481121125933934477429
+    # q = 89855181341172893110764453512406142438324081807631
+    # rsa = RSA(p,q)
 
     # # given p,q,e
     # rsa = RSA(61, 53, 17)
@@ -29,21 +31,19 @@ if __name__ == "__main__":
     # q = utils.randPrime(n_bits = 100)
     # rsa = RSA(p, q)
 
+    # random p,q with defined bit length
+    p = utils.randPrime(n_bits=100)
+    q = utils.randPrime(n_bits=100)
+    e = 65537
+    rsa = RSA(p, q, e)
+
+    print("Creating RSA Scheme")
     print("p={}\nq={}\nn={}\ne={}\nd={}".format(rsa.p, rsa.q, rsa.pub_key[1], rsa.pub_key[0], rsa.pri_key[0]))
     print("key length: {}bits".format((rsa.p*rsa.q).bit_length()))
 
-    m = "hello"
+    # perform timing attack
+    timingAttack = TimingAttack(rsa)
+    timingAttack.attack()
 
-    start_time = time.time_ns()
-    c = rsa.encrypt(m)
-    end_time = time.time_ns()
-    print("encryption time: {}ms".format((end_time - start_time)/1000000))
-
-    start_time = time.time_ns()
-    decryped = rsa.decrypt(c)
-    end_time = time.time_ns()
-    print("decryption time: {}ms".format((end_time - start_time)/1000000))
-
-    print("message:", m)
-    print("encrypted:", c)
-    print("decrypted:", decryped)
+if __name__ == "__main__":
+    main()

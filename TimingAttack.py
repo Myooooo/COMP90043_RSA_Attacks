@@ -33,12 +33,16 @@ class TimingAttack:
         n = self.pub_key[1]
         n_bits = n.bit_length()
 
+        print("\nPerforming timing attack\n")
+
+        # analyse by bits
         for i in range(1, n_bits):
             print("Analysing bit {}/{}".format(i, n_bits))
 
             Y_timings = []
             Z_timings = []
 
+            # sample n trials
             for _ in tqdm(range(n_trials), ascii=False, ncols=100):
                 Y = random.randint(1, int(n ** (1/3.0)))
                 Z = random.randint(int(n ** (1/3.0)), int(n ** (1/2.0)))
@@ -49,10 +53,12 @@ class TimingAttack:
                 Y_timings.append(Y_timing)
                 Z_timings.append(Z_timing)
 
+            # compute mean time
             Y_mean = statistics.mean(Y_timings)
             Z_mean = statistics.mean(Z_timings)
             print(Y_mean, Z_mean)
 
+            # compare and push bit
             if Z_mean > Y_mean:
                 # push 1
                 d_rec = (d_rec << 1) | 1
@@ -62,15 +68,4 @@ class TimingAttack:
             
             print("Recovered d: {}".format(bin(d_rec)))
 
-        print(d_rec)
-        
-# random p,q with defined bit length
-p = utils.randPrime(n_bits=100)
-q = utils.randPrime(n_bits=100)
-e = 65537
-rsa = RSA(p, q, e)
-print("p={}\nq={}\nn={}\ne={}\nd={}".format(rsa.p, rsa.q, rsa.pub_key[1], rsa.pub_key[0], rsa.pri_key[0]))
-print("key length: {}bits".format((rsa.p*rsa.q).bit_length()))
-
-timingAttack = TimingAttack(rsa)
-timingAttack.attack()
+        print("Recovered d: {}".format(d_rec))
