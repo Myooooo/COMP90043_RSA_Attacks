@@ -1,13 +1,6 @@
-import random
-import time
-import warnings
-
 import utils
 from RSA import RSA
 from TimingAttack import TimingAttack
-
-random.seed(time.time())
-warnings.filterwarnings('ignore')
 
 def main():
     # # random p,q,e

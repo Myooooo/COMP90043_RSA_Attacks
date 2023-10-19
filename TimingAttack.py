@@ -33,6 +33,8 @@ class TimingAttack:
         n = self.pub_key[1]
         n_bits = n.bit_length()
 
+        start_time = time.time()
+
         # analyse by bits
         for i in range(1, n_bits):
             print("Analysing bit {}/{}".format(i, n_bits))
@@ -68,4 +70,6 @@ class TimingAttack:
             
             print("Recovered d: {}".format(bin(d_rec)))
 
+        elapsed_time = time.time() - start_time
+        print("\nTime elapsed: {}s".format(elapsed_time))
         print("Final recovered d: {}".format(d_rec))
