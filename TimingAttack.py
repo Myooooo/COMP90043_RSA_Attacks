@@ -39,12 +39,14 @@ class TimingAttack:
 
             # sample n trials
             for _ in tqdm(range(n_trials), ascii=False, ncols=100):
+
+                # Y^3 < N, Z^2 < N < Z^3
                 Y = random.randint(1, int(n ** (1/3.0)))
                 Z = random.randint(int(n ** (1/3.0)), int(n ** (1/2.0)))
 
+                # sample decryption times
                 Y_timing = self.getAvgDecryptTime(Y)
                 Z_timing = self.getAvgDecryptTime(Z)
-                
                 Y_timings.append(Y_timing)
                 Z_timings.append(Z_timing)
 
@@ -53,7 +55,7 @@ class TimingAttack:
             Z_mean = statistics.mean(Z_timings)
             print(Y_mean, Z_mean)
 
-            # compare and push bit
+            # compare mean time and push bit
             if Z_mean > Y_mean:
                 # push 1
                 d_rec = (d_rec << 1) | 1
@@ -63,4 +65,4 @@ class TimingAttack:
             
             print("Recovered d: {}".format(bin(d_rec)))
 
-        print("Recovered d: {}".format(d_rec))
+        print("Final recovered d: {}".format(d_rec))
