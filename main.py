@@ -37,11 +37,12 @@ def main():
     e = 65537
     rsa = RSA(p, q, e)
 
-    print("Creating RSA Scheme")
+    print("\n>>> Creating RSA Scheme <<<\n")
     print("p={}\nq={}\nn={}\ne={}\nd={}".format(rsa.p, rsa.q, rsa.pub_key[1], rsa.pub_key[0], rsa.pri_key[0]))
     print("key length: {}bits".format((rsa.p*rsa.q).bit_length()))
 
     # perform timing attack
+    print("\n>>> Performing timing attack <<<\n")
     timingAttack = TimingAttack(rsa)
     timingAttack.attack()
 

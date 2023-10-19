@@ -4,9 +4,6 @@ import statistics
 from matplotlib import pyplot as plt
 from tqdm import tqdm
 
-import utils
-from RSA import RSA
-
 class TimingAttack:
     def __init__(self, rsa):
         self.rsa = rsa
@@ -32,8 +29,6 @@ class TimingAttack:
         d_rec = 1
         n = self.pub_key[1]
         n_bits = n.bit_length()
-
-        print("\nPerforming timing attack\n")
 
         # analyse by bits
         for i in range(1, n_bits):
