@@ -48,12 +48,11 @@ class TimingAttack:
         d_rec = 1
         n = self.pub_key[1]
         n_bits = n.bit_length()
-
         start_time = time.time()
 
         # analyse by bits
         for i in range(1, n_bits):
-            print("Analysing bit {}/{}".format(i, n_bits))
+            print("Analysing bit {}/{}".format(i+1, n_bits))
 
             Y_timings = []
             Z_timings = []
@@ -76,8 +75,8 @@ class TimingAttack:
             Z_mean = statistics.mean(Z_timings)
 
             # compare mean time and push bit
-            offset = Y_mean * 0.1
-            if Z_mean + offset > Y_mean:
+            offset = Y_mean * 0.05
+            if Z_mean > Y_mean + offset:
                 # push 1
                 d_rec = (d_rec << 1) | 1
             else:

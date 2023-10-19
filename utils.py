@@ -23,9 +23,9 @@ def randPrime(start=2, end=100):
 
 # return a random n_bits prime number
 def randPrime(n_bits=10):
-    prime_candidate = random.getrandbits(n_bits)
+    prime_candidate = random.getrandbits(n_bits) | (1 << (n_bits - 1))
     while not isPrime(prime_candidate):
-        prime_candidate = random.getrandbits(n_bits)
+        prime_candidate = random.getrandbits(n_bits) | (1 << (n_bits - 1))
     return prime_candidate
 
 # return GCD of a and b

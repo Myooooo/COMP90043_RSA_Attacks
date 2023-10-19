@@ -25,8 +25,8 @@ def main():
     # rsa = RSA(p, q)
 
     # random p,q with defined bit length
-    p = utils.randPrime(n_bits=100)
-    q = utils.randPrime(n_bits=100)
+    p = utils.randPrime(n_bits=128)
+    q = utils.randPrime(n_bits=128)
     e = 65537
     rsa = RSA(p, q, e)
 
