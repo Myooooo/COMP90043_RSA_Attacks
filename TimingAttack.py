@@ -19,7 +19,7 @@ class TimingAttack:
         return end_time - start_time
     
     # return average decryption time a m_char message over n trials in ns
-    def getAvgDecryptTime(self, m_num, n_trials=5):
+    def getAvgDecryptTime(self, m_num, n_trials=10):
         c_num = self.rsa.encrypt_int(m_num)
         timings = []
         for _ in range(n_trials):
@@ -65,8 +65,8 @@ class TimingAttack:
                 Z = random.randint(int(n ** (1/3.0)), int(n ** (1/2.0)))
 
                 # sample decryption times
-                Y_timing = self.getAvgDecryptTime(Y)
-                Z_timing = self.getAvgDecryptTime(Z)
+                Y_timing = self.getAvgDecryptTime(Y, 1)
+                Z_timing = self.getAvgDecryptTime(Z, 1)
                 Y_timings.append(Y_timing)
                 Z_timings.append(Z_timing)
 
@@ -75,7 +75,7 @@ class TimingAttack:
             Z_mean = statistics.mean(Z_timings)
 
             # compare mean time and push bit
-            offset = Y_mean * 0.05
+            offset = Y_mean * 0.01
             if Z_mean > Y_mean + offset:
                 # push 1
                 d_rec = (d_rec << 1) | 1

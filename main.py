@@ -25,8 +25,8 @@ def main():
     # rsa = RSA(p, q)
 
     # random p,q with defined bit length
-    p = utils.randPrime(n_bits=128)
-    q = utils.randPrime(n_bits=128)
+    p = utils.randPrime(n_bits=64)
+    q = utils.randPrime(n_bits=64)
     e = 65537
     rsa = RSA(p, q, e)
 
@@ -37,7 +37,7 @@ def main():
     # perform timing attack
     print("\n>>> Performing timing attack <<<\n")
     timingAttack = TimingAttack(rsa)
-    timingAttack.attack()
+    timingAttack.attack(n_trials = 100 * (rsa.p*rsa.q).bit_length())
 
 if __name__ == "__main__":
     main()
