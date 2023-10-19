@@ -4,6 +4,9 @@ import statistics
 from matplotlib import pyplot as plt
 from tqdm import tqdm
 
+# seed random generator for constant result
+random.seed(88)
+
 class TimingAttack:
     def __init__(self, rsa):
         self.rsa = rsa
@@ -17,7 +20,7 @@ class TimingAttack:
         return (end_time - start_time)/1000
     
     # return average decryption time a m_char message over n trials in ns
-    def getAvgDecryptTime(self, m_num, n_trails=10):
+    def getAvgDecryptTime(self, m_num, n_trails=5):
         c_num = self.rsa.encrypt_int(m_num)
         timings = []
         for _ in range(n_trails):
