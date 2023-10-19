@@ -22,7 +22,7 @@ def randPrime(start=2, end=100):
     return prime_candidate
 
 # return a random n_bits prime number
-def randPrime(n_bits = 10):
+def randPrime(n_bits=10):
     prime_candidate = random.getrandbits(n_bits)
     while not isPrime(prime_candidate):
         prime_candidate = random.getrandbits(n_bits)
