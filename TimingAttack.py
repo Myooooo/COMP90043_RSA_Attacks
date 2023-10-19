@@ -1,7 +1,6 @@
 import time
 import random
 import statistics
-from matplotlib import pyplot as plt
 from tqdm import tqdm
 
 # seed random generator for constant result
@@ -26,6 +25,23 @@ class TimingAttack:
         for _ in range(n_trails):
             timings.append(self.getDecryptTime(c_num))
         return statistics.mean(timings)
+    
+    # returns the number of different bits between a and b
+    def getDiffBits(self, a, b):
+        # trim longer integer
+        len_diff = a.bit_length() - b.bit_length()
+        if len_diff > 0:
+            a >>= len_diff
+        else:
+            b >>= -len_diff
+
+        # XOR for different bits
+        xor = a ^ b
+        n = 0
+        for _ in range(a.bit_length()):
+            n += xor & 1
+            xor >>= 1
+        return n
 
     # perform timing attack
     def attack(self, n_trials=1000):
@@ -71,5 +87,7 @@ class TimingAttack:
             print("Recovered d: {}".format(bin(d_rec)))
 
         elapsed_time = time.time() - start_time
-        print("\nTime elapsed: {}s".format(elapsed_time))
-        print("Final recovered d: {}".format(d_rec))
+        print("\nTime elapsed: \t{}s".format(elapsed_time))
+        print("Recovered d: \t{}".format(d_rec))
+        print("Actual d: \t{}".format(self.rsa.pri_key[0]))
+        print("Accuracy: \t{}%".format(self.getDiffBits(d_rec, self.rsa.pri_key[0]) / self.rsa.pri_key[0].bit_length() * 100))
