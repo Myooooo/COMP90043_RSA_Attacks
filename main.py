@@ -3,7 +3,6 @@ import time
 import warnings
 
 from RSA import RSA
-import utils
 
 random.seed(time.time())
 warnings.filterwarnings('ignore')
