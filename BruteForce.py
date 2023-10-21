@@ -8,7 +8,7 @@ import utils
 from RSA import RSA
 
 MINBIT = 2
-MAXBIT = 20
+MAXBIT = 21
 REPEAT = 10.0
 
 # Function to factorize an integer n
