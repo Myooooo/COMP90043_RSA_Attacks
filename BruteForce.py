@@ -8,7 +8,7 @@ import utils
 from RSA import RSA
 
 MINBIT = 2
-MAXBIT = 31
+MAXBIT = 20
 REPEAT = 10.0
 
 # Function to factorize an integer n
@@ -24,7 +24,7 @@ def fac(n):
     return s
     
     
-def main():
+def attack():
     # Initialize the time count for n-bit RSA brute force decryption
     time_data = {}
     for bit in range(MINBIT, MAXBIT):
@@ -67,6 +67,3 @@ def test(time_data):
         
         # Calculate time taken and store the time data
         time_data[n_bits] += end_time - start_time
-
-if __name__ == "__main__":
-    main()

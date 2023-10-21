@@ -1,6 +1,7 @@
 import utils
 from RSA import RSA
 from TimingAttack import TimingAttack
+import BruteForce
 
 def main():
     # # random p,q,e
@@ -35,9 +36,15 @@ def main():
     print("key length: {}bits".format((rsa.p*rsa.q).bit_length()))
 
     # perform timing attack
-    print("\n>>> Performing timing attack <<<\n")
-    timingAttack = TimingAttack(rsa)
-    timingAttack.attack(n_trials = 100 * (rsa.p*rsa.q).bit_length())
+    #print("\n>>> Performing timing attack <<<\n")
+    #timingAttack = TimingAttack(rsa)
+    #timingAttack.attack(n_trials = 100 * (rsa.p*rsa.q).bit_length())
 
+    # perform brute force attack
+    print("\n>>> Performing brute force attack <<<\n")
+    print("This will take about 2 hours to run 10 REPEAT times up to 30-bit RSA")
+    print("Please modify the constant MAXBIT to see the impact of key length")
+    BruteForce.attack()
+    
 if __name__ == "__main__":
     main()
