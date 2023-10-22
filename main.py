@@ -3,6 +3,7 @@ from RSA import RSA
 from TimingAttack import TimingAttack
 import BruteForce
 import ChosenCipher
+
 def main():
     # # random p,q,e
     # rsa = RSA()
@@ -26,8 +27,8 @@ def main():
     # rsa = RSA(p, q)
 
     # random p,q with defined bit length
-    p = utils.randPrime(n_bits=64)
-    q = utils.randPrime(n_bits=64)
+    p = utils.randPrime(n_bits=32)
+    q = utils.randPrime(n_bits=32)
     e = 65537
     rsa = RSA(p, q, e)
 
@@ -37,7 +38,7 @@ def main():
 
     # perform timing attack
     print("\n>>> Performing timing attack <<<\n")
-    timingAttack = TimingAttack(rsa)
+    timingAttack = TimingAttack(rsa, offset = 0.01)
     timingAttack.attack(n_trials = 100 * (rsa.p*rsa.q).bit_length())
 
     # perform brute force attack
@@ -46,15 +47,13 @@ def main():
     print("Please modify the constant MAXBIT to see the impact of key length")
     BruteForce.attack()
     
-    
-    
     #perform Chosen Plaintext attack
     print("\n>>> Performing Chosen Plaintext attack <<<\n")
-    ChosenCipher.CPA(rsa)
+    ChosenCipher.CPA(p,q)
     
     #perform Chosen Ciphertext attack
     print("\n>>> Performing Chosen Ciphertext attack <<<\n")
-    ChosenCipher.CCA(rsa)
+    ChosenCipher.CCA(p,q)
     
     
 if __name__ == "__main__":
