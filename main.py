@@ -36,25 +36,26 @@ def main():
     print("p={}\nq={}\nn={}\ne={}\nd={}".format(rsa.p, rsa.q, rsa.pub_key[1], rsa.pub_key[0], rsa.pri_key[0]))
     print("key length: {}bits".format((rsa.p*rsa.q).bit_length()))
 
-    # perform timing attack
-    print("\n>>> Performing timing attack <<<\n")
-    timingAttack = TimingAttack(rsa, offset = 0.01)
-    timingAttack.attack(n_trials = 100 * (rsa.p*rsa.q).bit_length())
-
     # perform brute force attack
     print("\n>>> Performing brute force attack <<<\n")
     print("This will take about 2 hours to run 10 REPEAT times up to 30-bit RSA")
     print("Please modify the constant MAXBIT to see the impact of key length")
     BruteForce.attack()
     
-    #perform Chosen Plaintext attack
+    # perform Chosen Plaintext attack
     print("\n>>> Performing Chosen Plaintext attack <<<\n")
     ChosenCipher.CPA(p,q)
     
-    #perform Chosen Ciphertext attack
+    # perform Chosen Ciphertext attack
     print("\n>>> Performing Chosen Ciphertext attack <<<\n")
     ChosenCipher.CCA(p,q)
-    
+
+    # perform timing attack
+    print("\n>>> Performing timing attack <<<\n")
+    print("NOTE: Timing might be messed up by docker environment.")
+    print("Please run source code locally for better results.")
+    timingAttack = TimingAttack(rsa, offset = 0.01)
+    timingAttack.attack(n_trials = 100 * (rsa.p*rsa.q).bit_length())
     
 if __name__ == "__main__":
     main()
