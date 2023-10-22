@@ -7,9 +7,10 @@ from tqdm import tqdm
 random.seed(88)
 
 class TimingAttack:
-    def __init__(self, rsa):
+    def __init__(self, rsa, offset=0.01):
         self.rsa = rsa
         self.pub_key = rsa.pub_key
+        self.offset = offset
     
     # return decryption time on c in ns
     def getDecryptTime(self, c_num):
@@ -75,7 +76,7 @@ class TimingAttack:
             Z_mean = statistics.mean(Z_timings)
 
             # compare mean time and push bit
-            offset = Y_mean * 0.01
+            offset = Y_mean * self.offset
             if Z_mean > Y_mean + offset:
                 # push 1
                 d_rec = (d_rec << 1) | 1
